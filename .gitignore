@@ -1,4 +1,4 @@
 .DS_Store
 node_modules/
-dist/
+extension/dist/
 npm-debug.log

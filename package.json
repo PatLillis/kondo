@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "description": "A browser extension for Chrome based on Marie Kondo's \"The life-changing magic of tidying up\"",
   "author": "Pat Lillis <lillispm@gmail.com>",
+  "repository": "https://www.github.com/patlillis/kondo",
   "scripts": {
-    "dev": "webpack-dev-server --inline --hot",
+    "dev": "webpack-dev-server --inline --hot/",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
