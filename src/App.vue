@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div id="sun"></div>
+    <!-- <div id="sun"></div> -->
     <h1 id="msg">{{{ msg | dewidow 3 }}}</h1>
   </div>
 </template>
@@ -48,7 +48,7 @@ export default {
 
   #msg {
     color: #CC212A;
-    font-size: 48pt;
+    font-size: 32pt;
     position: absolute;
     left: 50px;
     bottom: 50px;
