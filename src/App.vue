@@ -1,10 +1,13 @@
 <template>
   <div id="app">
-    <h1>{{ msg }}</h1>
+    <div id="sun"></div>
+    <h1 id="msg">{{{ msg | dewidow 3 }}}</h1>
   </div>
 </template>
 
 <script>
+import quotes from "./_quotes.js"
+
 export default {
   data () {
     return {
@@ -12,25 +15,44 @@ export default {
       // with hot-reload because the reloaded component
       // preserves its current state and we are modifying
       // its initial state.
-      msg: 'Hello Vue!'
+      msg: quotes[0]
     }
   }
 }
 </script>
 
 <style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;    
+  }
+
   body {
-    font-family: Helvetica, sans-serif;
-    background: #B1FFFC;
+    font-family: 'EB Garamond', serif;
+    position: relative;
+    background-image: url('./img/kondo_bg.jpg');
+    background-size: cover;
   }
 
-  #app {
-    text-align: center;
-    margin-top: 10%;
+  #sun {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    background-color: #CC212A;
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.3);
   }
 
-  h1 {
-    color:#FF4748;
-    font-size: 64px;
+  #msg {
+    color: #CC212A;
+    font-size: 48pt;
+    position: absolute;
+    left: 50px;
+    bottom: 50px;
+    margin: 0;
+    right: 50px;
   }
 </style>
