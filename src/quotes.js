@@ -25,38 +25,71 @@ const quotes = [
 function quote() {
     let quoteIndex;
 
-    // Try to get the previously seen quote
+    //If store is not enabled, just get a random quote
     if (store.enabled) {
-        console.log('store is enable');
+        //Set defaults
+        // if (!store.has('lastUpdated'))
+            store.set('lastUpdated', new Date());
+        // if (!store.has('lastQuoteIndex'))
+            store.set('lastQuoteIndex', 0);
+        // if (!store.has('mostRecentQuotes'))
+            store.set('mostRecentQuotes', [0, 1, 2]);
 
-        const lastUpdated = store.get('lastUpdated');
         const now = new Date();
 
+        // Get values from localStorage
+        const lastUpdated = store.get('lastUpdated');
+        const lastQuoteIndex = store.get('lastQuoteIndex');
+        const mostRecentQuotes = store.get('mostRecentQuotes');
+
+
         // If it's the same day, use previous quote
-        if (lastUpdated) {
-            const lastUpdatedDate = new Date(lastUpdated)
+        const lastUpdatedDate = new Date(lastUpdated)
 
-            if (lastUpdatedDate.getFullYear() === now.getFullYear() &&
-                lastUpdatedDate.getMonth() === now.getMonth() &&
-                lastUpdatedDate.getDate() === now.getDate()) {
-                quoteIndex = store.get('lastQuoteIndex');
-            }
-        }
-    }
-
-    // If we don't have a quote (either because store.js isn't enabled, or because it's a new day),
-    // Generate a new one.
-    if (quoteIndex === undefined) {
-        quoteIndex = Math.floor(Math.random() * quotes.length);
-
-        // Try to store the new quote back into store
-        if (store.enabled) {
+        if (false && lastUpdatedDate.getFullYear() === now.getFullYear() &&
+            lastUpdatedDate.getMonth() === now.getMonth() &&
+            lastUpdatedDate.getDate() === now.getDate()) {
+            quoteIndex = lastQuoteIndex;
+        } else {
+            quoteIndex = randomQuoteIndex(mostRecentQuotes);
             store.set('lastQuoteIndex', quoteIndex);
             store.set('lastUpdated', new Date());
+            store.set('mostRecentQuotes', mostRecentQuotes);
         }
     }
 
+    //If we didn't get the quote index for some reason, just return a random quote.
+    if (!quoteIndex) {
+        quoteIndex = randomQuoteIndex();
+    }
+
+    return "";
     return quotes[quoteIndex];
+}
+
+function randomQuoteIndex(mostRecentQuotes) {
+    let quoteIndex;
+
+    if (mostRecentQuotes) {
+        let index = Math.floor(Math.random() * (quotes.length - mostRecentQuotes.length));
+        for (let i = 0; i < quotes.length; i++) {
+            if (!mostRecentQuotes.contains(i))
+                index--;
+
+            if (index == -1) {
+                //We've found it!
+                quoteIndex = i;
+                break;
+            }
+        }
+
+        mostRecentQuotes.splice(0, 1);
+        mostRecentQuotes.push(quoteIndex);
+    } else {
+        quoteIndex = Math.floor(Math.random() * quotes.length);
+    }
+
+    return quoteIndex;
 }
 
 export default quote;
