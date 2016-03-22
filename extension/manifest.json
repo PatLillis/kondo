@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "kondo",
     "description": "A browser extension for Chrome based on Marie Kondo's \"The life-changing magic of tidying up\"",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "chrome_url_overrides": {
         "newtab": "index.html"
     }

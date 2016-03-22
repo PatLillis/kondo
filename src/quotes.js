@@ -27,15 +27,20 @@ function quote() {
 
     // Try to get the previously seen quote
     if (store.enabled) {
+        console.log('store is enable');
+
         const lastUpdated = store.get('lastUpdated');
         const now = new Date();
 
         // If it's the same day, use previous quote
-        if (lastUpdated && false &&
-            lastUpdated.getFullYear() === now.getFullYear() &&
-            lastUpdated.getMonth() === now.getMonth() &&
-            lastUpdated.getDate() === now.getDate()) {
-            quoteIndex = store.get('lastQuoteIndex');
+        if (lastUpdated) {
+            const lastUpdatedDate = new Date(lastUpdated)
+
+            if (lastUpdatedDate.getFullYear() === now.getFullYear() &&
+                lastUpdatedDate.getMonth() === now.getMonth() &&
+                lastUpdatedDate.getDate() === now.getDate()) {
+                quoteIndex = store.get('lastQuoteIndex');
+            }
         }
     }
 
@@ -46,13 +51,12 @@ function quote() {
 
         // Try to store the new quote back into store
         if (store.enabled) {
-        	store.set('lastQuoteIndex', quoteIndex);
-        	store.set('lastUpdated', new Date());
+            store.set('lastQuoteIndex', quoteIndex);
+            store.set('lastUpdated', new Date());
         }
     }
+
+    return quotes[quoteIndex];
 }
 
-export default {
-    quotes,
-    quote
-};
+export default quote;

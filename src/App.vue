@@ -8,12 +8,9 @@
 import quote from "./quotes.js"
 console.log();
 export default {
-  data () {
-    const q = quote();
-
-    return {
-      msg: q
-    }
+  computed: {
+    // a computed getter
+    msg: quote
   }
 }
 </script>
