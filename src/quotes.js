@@ -46,7 +46,7 @@ function quote() {
         // If it's the same day, use previous quote
         const lastUpdatedDate = new Date(lastUpdated)
 
-        if (false && lastUpdatedDate.getFullYear() === now.getFullYear() &&
+        if (lastUpdatedDate.getFullYear() === now.getFullYear() &&
             lastUpdatedDate.getMonth() === now.getMonth() &&
             lastUpdatedDate.getDate() === now.getDate()) {
             quoteIndex = lastQuoteIndex;
@@ -72,7 +72,7 @@ function randomQuoteIndex(mostRecentQuotes) {
     let quoteIndex;
 
     if (mostRecentQuotes !== undefined) {
-        let index = 0;//Math.floor(Math.random() * (quotes.length - mostRecentQuotes.length));
+        let index = Math.floor(Math.random() * (quotes.length - mostRecentQuotes.length));
         for (let i = 0; i < quotes.length; i++) {
             if (mostRecentQuotes.indexOf(i) == -1)
                 index--;
@@ -84,8 +84,13 @@ function randomQuoteIndex(mostRecentQuotes) {
             }
         }
 
-        mostRecentQuotes.splice(0, 1);
+        // Add this entry to most recent quotes
         mostRecentQuotes.push(quoteIndex);
+
+        // Only ever want recent quotes to have length 1/2 of total quotes
+        // This is so that it seems a little more random
+        if (mostRecentQuotes.length >= (quotes.length * 0.75))
+            mostRecentQuotes.splice(0, 1);
     } else {
         quoteIndex = Math.floor(Math.random() * quotes.length);
     }
