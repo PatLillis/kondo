@@ -28,12 +28,12 @@ function quote() {
     //If store is not enabled, just get a random quote
     if (store.enabled) {
         //Set defaults
-        // if (!store.has('lastUpdated'))
+        if (!store.has('lastUpdated'))
             store.set('lastUpdated', new Date());
-        // if (!store.has('lastQuoteIndex'))
+        if (!store.has('lastQuoteIndex'))
             store.set('lastQuoteIndex', 0);
-        // if (!store.has('mostRecentQuotes'))
-            store.set('mostRecentQuotes', [0, 1, 2]);
+        if (!store.has('mostRecentQuotes'))
+            store.set('mostRecentQuotes', []);
 
         const now = new Date();
 
@@ -59,21 +59,22 @@ function quote() {
     }
 
     //If we didn't get the quote index for some reason, just return a random quote.
-    if (!quoteIndex) {
+    if (quoteIndex === undefined) {
         quoteIndex = randomQuoteIndex();
     }
 
-    return "";
+    // return "";
+    // return `${store.get('mostRecentQuotes')}  ${quoteIndex}`;
     return quotes[quoteIndex];
 }
 
 function randomQuoteIndex(mostRecentQuotes) {
     let quoteIndex;
 
-    if (mostRecentQuotes) {
-        let index = Math.floor(Math.random() * (quotes.length - mostRecentQuotes.length));
+    if (mostRecentQuotes !== undefined) {
+        let index = 0;//Math.floor(Math.random() * (quotes.length - mostRecentQuotes.length));
         for (let i = 0; i < quotes.length; i++) {
-            if (!mostRecentQuotes.contains(i))
+            if (mostRecentQuotes.indexOf(i) == -1)
                 index--;
 
             if (index == -1) {
