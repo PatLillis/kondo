@@ -1,9 +1,11 @@
 import store from 'store'
 import quotes from './quotes.json'
+const quotesArr = Object.keys(quotes).map(q => quotes[q]);
 
 // When called, will figure out which quote we should used,
 // Based on user's previously seen quotes, and the date
 function quote() {
+
     let quoteIndex;
 
     //If store is not enabled, just get a random quote
@@ -44,17 +46,15 @@ function quote() {
         quoteIndex = randomQuoteIndex();
     }
 
-
-    const keys = Object.keys(quotes);
-    return quotes[keys[quoteIndex]];
+    return quotesArr[quoteIndex];
 }
 
 function randomQuoteIndex(mostRecentQuotes) {
     let quoteIndex;
 
     if (mostRecentQuotes !== undefined) {
-        let index = Math.floor(Math.random() * (quotes.length - mostRecentQuotes.length));
-        for (let i = 0; i < quotes.length; i++) {
+        let index = Math.floor(Math.random() * (quotesArr.length - mostRecentQuotes.length));
+        for (let i = 0; i < quotesArr.length; i++) {
             if (mostRecentQuotes.indexOf(i) == -1)
                 index--;
 
@@ -70,10 +70,11 @@ function randomQuoteIndex(mostRecentQuotes) {
 
         // Only ever want recent quotes to have length 1/2 of total quotes
         // This is so that it seems a little more random
-        if (mostRecentQuotes.length >= (quotes.length * 0.75))
+        const desiredLength = quotesArr.length * 0.75;
+        while (mostRecentQuotes.length > 0 && mostRecentQuotes.length >= desiredLength)
             mostRecentQuotes.splice(0, 1);
     } else {
-        quoteIndex = Math.floor(Math.random() * quotes.length);
+        quoteIndex = Math.floor(Math.random() * quotesArr.length);
     }
 
     return quoteIndex;
