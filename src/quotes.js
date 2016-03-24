@@ -1,24 +1,5 @@
 import store from 'store'
-
-const quotes = [
-    // Page 1
-    "Start by discarding. Then organize your space, thoroughly, completely, in one go.",
-
-    // Page 2
-    "A dramatic reorganization of the home causes correspondingly dramatic changes in lifestyle and perspective. It is life transforming.",
-
-    // Page 4
-    "When you put your house in order, you put your affairs and your past in order, too.",
-
-    // Page 5
-    "&hellip;they are surrounded only by the things they love",
-
-    // Page 41
-    "We should be choosing what we want to keep, not what we want to get rid of.",
-
-    // Page 53
-    "The urge to point out someone else's failure to tidy is usually a sign that you are neglecting to take care of your own space."
-]
+import quotes from './quotes.json'
 
 // When called, will figure out which quote we should used,
 // Based on user's previously seen quotes, and the date
@@ -63,9 +44,9 @@ function quote() {
         quoteIndex = randomQuoteIndex();
     }
 
-    // return "";
-    // return `${store.get('mostRecentQuotes')}  ${quoteIndex}`;
-    return quotes[quoteIndex];
+
+    const keys = Object.keys(quotes);
+    return quotes[keys[quoteIndex]];
 }
 
 function randomQuoteIndex(mostRecentQuotes) {
