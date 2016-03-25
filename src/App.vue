@@ -16,6 +16,13 @@ export default {
 </script>
 
 <style>
+  @font-face {
+   font-family: 'EB Garamond';
+   font-style: normal;
+   font-weight: 400;
+   src: url('./fonts/EBGaramond-Regular.ttf') format('truetype');
+  }
+
   html, body {
     height: 100%;
     margin: 0;
