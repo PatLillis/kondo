@@ -1,6 +1,6 @@
 {
   "name": "kondo",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "A browser extension for Chrome based on Marie Kondo's \"The life-changing magic of tidying up\"",
   "author": "Pat Lillis <lillispm@gmail.com>",
   "repository": "https://www.github.com/patlillis/kondo",
