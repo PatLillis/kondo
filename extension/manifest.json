@@ -3,7 +3,7 @@
   "name": "kondo",
   "author": "Pat Lillis",
   "description": "A browser extension for Chrome based on Marie Kondo's \"The life-changing magic of tidying up\"",
-  "version": "0.10.0",
+  "version": "1.0.0",
   "default_locale": "en",
   "chrome_url_overrides": {
     "newtab": "index.html"
