@@ -2,6 +2,8 @@
 
 > A browser extension for Chrome based on Marie Kondo's "The life-changing magic of tidying up"
 
+Available now in the [Chrome Web Store](https://chrome.google.com/webstore/detail/kondo/phcekhdlegogpimfbkdeboniifnjdbol)
+
 ## Build Setup
 
 ``` bash
